@@ -1,3 +1,5 @@
+using Net.S._2018.Zenovich._14.DAL.Models;
+
 namespace Net.S._2018.Zenovich._14.DAL.Migrations
 {
     using System;
@@ -14,10 +16,46 @@ namespace Net.S._2018.Zenovich._14.DAL.Migrations
 
         protected override void Seed(Net.S._2018.Zenovich._14.DAL.Contexts.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (context.Accounts.Any() == false && context.People.Any() == false)
+            {
+                Person alex = new Person()
+                {
+                    FirstName = "Alex",
+                    LastName = "Zenovich",
+                    Email = "alex@example.com",
+                };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+                Person bob = new Person()
+                {
+                    FirstName = "Bob",
+                    LastName = "Frank",
+                    Email = "bob@example.com"
+                };
+
+                Account alexBaseAccount = new Account()
+                {
+                    Type = AccountType.Base,
+                    Ownder = alex
+                };
+
+                Account alexGoldAccount = new Account()
+                {
+                    Type = AccountType.Gold,
+                    Ownder = alex,
+                };
+
+                Account bobAccount = new Account()
+                {
+                    Type = AccountType.Platinum,
+                    Ownder = bob
+                };
+
+                context.Accounts.Add(alexBaseAccount);
+                context.Accounts.Add(alexGoldAccount);
+                context.Accounts.Add(bobAccount);
+
+                context.SaveChanges();
+            }
         }
     }
 }
