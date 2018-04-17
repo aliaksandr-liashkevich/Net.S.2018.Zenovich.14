@@ -49,6 +49,11 @@
   <ItemGroup>
     <Compile Include="Contexts\ApplicationDbContext.cs" />
     <Compile Include="Contexts\Configuration\ApplicationInitializer.cs" />
+    <Compile Include="Migrations\201804171931488_InitDb.cs" />
+    <Compile Include="Migrations\201804171931488_InitDb.Designer.cs">
+      <DependentUpon>201804171931488_InitDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Person.cs" />
@@ -57,6 +62,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804171931488_InitDb.resx">
+      <DependentUpon>201804171931488_InitDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

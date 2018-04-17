@@ -10,9 +10,15 @@ namespace Net.S._2018.Zenovich._14.DAL.Contexts
 {
     public class ApplicationDbContext : DbContext
     {
+        public const string DefaultConnectionString = "DefaultDBContext";
 
         public ApplicationDbContext(string connectionString)
             : base(connectionString)
+        {
+        }
+
+        public ApplicationDbContext()
+            : base(DefaultConnectionString)
         {
         }
 

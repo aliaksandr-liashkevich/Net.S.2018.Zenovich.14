@@ -19,7 +19,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Models
         [Key]
         public Guid id { get; set; }
         
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Required]
         public DateTime CreationDate { get; }
 
