@@ -13,7 +13,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804171931488_InitDb"; }
+            get { return "201804172140272_InitDb"; }
         }
         
         string IMigrationMetadata.Source

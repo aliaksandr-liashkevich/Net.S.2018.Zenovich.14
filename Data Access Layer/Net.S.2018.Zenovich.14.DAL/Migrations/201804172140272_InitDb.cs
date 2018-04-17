@@ -11,35 +11,35 @@ namespace Net.S._2018.Zenovich._14.DAL.Migrations
                 "dbo.Accounts",
                 c => new
                     {
-                        id = c.Guid(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false, identity: true),
                         CreationDate = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
                         Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Bonus = c.Long(nullable: false),
                         Type = c.Int(nullable: false),
                         IsClosed = c.Boolean(nullable: false),
-                        Ownder_id = c.Guid(nullable: false),
+                        Owner_Id = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.People", t => t.Ownder_id, cascadeDelete: true)
-                .Index(t => t.Ownder_id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.People", t => t.Owner_Id, cascadeDelete: true)
+                .Index(t => t.Owner_Id);
             
             CreateTable(
                 "dbo.People",
                 c => new
                     {
-                        id = c.Guid(nullable: false, identity: true),
+                        Id = c.Guid(nullable: false, identity: true),
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
                         Email = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.id);
+                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Accounts", "Ownder_id", "dbo.People");
-            DropIndex("dbo.Accounts", new[] { "Ownder_id" });
+            DropForeignKey("dbo.Accounts", "Owner_Id", "dbo.People");
+            DropIndex("dbo.Accounts", new[] { "Owner_Id" });
             DropTable("dbo.People");
             DropTable("dbo.Accounts");
         }

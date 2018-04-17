@@ -17,7 +17,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
         
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Required]
@@ -64,6 +64,6 @@ namespace Net.S._2018.Zenovich._14.DAL.Models
         public bool IsClosed { get; set; }
 
         [Required]
-        public Person Ownder { get; set; }
+        public Person Owner { get; set; }
     }
 }

@@ -35,19 +35,19 @@ namespace Net.S._2018.Zenovich._14.DAL.Migrations
                 Account alexBaseAccount = new Account()
                 {
                     Type = AccountType.Base,
-                    Ownder = alex
+                    Owner = alex
                 };
 
                 Account alexGoldAccount = new Account()
                 {
                     Type = AccountType.Gold,
-                    Ownder = alex,
+                    Owner = alex,
                 };
 
                 Account bobAccount = new Account()
                 {
                     Type = AccountType.Platinum,
-                    Ownder = bob
+                    Owner = bob
                 };
 
                 context.Accounts.Add(alexBaseAccount);

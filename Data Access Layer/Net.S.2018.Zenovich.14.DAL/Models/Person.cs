@@ -13,7 +13,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }
