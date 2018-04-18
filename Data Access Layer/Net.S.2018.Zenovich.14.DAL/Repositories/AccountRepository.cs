@@ -14,6 +14,11 @@ namespace Net.S._2018.Zenovich._14.DAL.Repositories
     {
         public ApplicationDbContext Db { get; set; }
 
+        public AccountRepository(ApplicationDbContext db)
+        {
+            Db = db;
+        }
+
         public void Add(Account account)
         {
             Db.Accounts.Add(account);
@@ -33,6 +38,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Repositories
         public void Update(Account account)
         {
             Db.Entry(account).State = EntityState.Modified;
+            Db.SaveChanges();
         }
     }
 }

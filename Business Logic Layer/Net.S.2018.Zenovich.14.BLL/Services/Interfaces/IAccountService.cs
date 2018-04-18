@@ -19,10 +19,10 @@ namespace Net.S._2018.Zenovich._14.BLL.Services.Interfaces
 
         void Close(Guid id);
 
+        void ReOpen(Guid id);
+
         void AddedAmount(UpdatedAmountViewModel vm);
 
         void WithdrawalAmount(UpdatedAmountViewModel vm);
-
-        PersonViewModel GetOwner(Guid id);
     }
 }

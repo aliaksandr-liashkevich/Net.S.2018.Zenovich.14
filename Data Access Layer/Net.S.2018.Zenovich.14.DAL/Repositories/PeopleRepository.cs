@@ -9,9 +9,14 @@ using Net.S._2018.Zenovich._14.DAL.Repositories.Interfaces;
 
 namespace Net.S._2018.Zenovich._14.DAL.Repositories
 {
-    public class PeopleRepository :IPeopleRepository
+    public class PeopleRepository : IPeopleRepository
     {
         public ApplicationDbContext Db { get; set; }
+
+        public PeopleRepository(ApplicationDbContext db)
+        {
+            Db = db;
+        }
 
         public void Add(Person person)
         {
@@ -20,7 +25,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Repositories
 
         public IEnumerable<Person> GetAll()
         {
-            return Db.People;
+            return Db.People.ToList();
         }
 
         public Person Get(Guid id)

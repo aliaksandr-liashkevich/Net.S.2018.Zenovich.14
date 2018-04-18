@@ -16,7 +16,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Repositories
 
         public UnitOfWork(ApplicationDbContext applicationDbContext,
             IAccountRepository accountRepository,
-            PeopleRepository peopleRepository)
+            IPeopleRepository peopleRepository)
         {
             _applicationDbContext = applicationDbContext;
             AccountRepository = accountRepository;
