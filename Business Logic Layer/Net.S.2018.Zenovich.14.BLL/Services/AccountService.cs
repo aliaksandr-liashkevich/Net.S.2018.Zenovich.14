@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Net.S._2018.Zenovich._14.BLL.Configuration;
+using Net.S._2018.Zenovich._14.BLL.Infrastructure.Api;
 using Net.S._2018.Zenovich._14.BLL.Services.Interfaces;
 using Net.S._2018.Zenovich._14.DAL.Models;
 using Net.S._2018.Zenovich._14.DAL.Repositories.Interfaces;
@@ -19,10 +20,15 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
         private IAccountRepository _accountRepository;
         private IPeopleRepository _peopleRepository;
 
-        public AccountService(IUnitOfWork unitOfWork)
+        private IBonusCounter _bonusCounter;
+        private IAccountTypeFeatures _accountTypeFeatures;
+
+        public AccountService(IUnitOfWork unitOfWork, IBonusCounter bonusCounter, IAccountTypeFeatures accountTypeFeatures)
         {
             _accountRepository = unitOfWork.AccountRepository;
             _peopleRepository = unitOfWork.PeopleRepository;
+            _bonusCounter = bonusCounter;
+            _accountTypeFeatures = accountTypeFeatures;
         }
 
         public void Add(AddedAccountViewModel vm)
@@ -90,7 +96,7 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
             {
                 if (account.IsClosed)
                 {
-                    account.IsClosed = true;
+                    account.IsClosed = false;
                     _accountRepository.Update(account);
                 }
             }
@@ -111,8 +117,15 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
             Account account = _accountRepository.Get(vm.Id);
             if (account != null)
             {
+                if (account.IsClosed)
+                {
+                    return;
+                }
 
-                account.Amount = account.Amount + vm.Currency;
+                _accountTypeFeatures.Load(account.Type);
+                account.Bonus = _bonusCounter.GetBonusFromAdded(_accountTypeFeatures, vm.Currency);
+                account.Amount = account.Amount + account.Bonus + vm.Currency;
+
                 _accountRepository.Update(account);
             }
         }
@@ -132,7 +145,20 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
             Account account = _accountRepository.Get(vm.Id);
             if (account != null)
             {
-                account.Amount = account.Amount - vm.Currency;
+                if (account.Amount - vm.Currency < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(vm));
+                }
+
+                if (account.IsClosed)
+                {
+                    return;
+                }
+
+                _accountTypeFeatures.Load(account.Type);
+                account.Bonus = _bonusCounter.GetBonusFromAdded(_accountTypeFeatures, vm.Currency);
+                account.Amount = account.Amount + account.Bonus - vm.Currency;
+
                 _accountRepository.Update(account);
             }
         }

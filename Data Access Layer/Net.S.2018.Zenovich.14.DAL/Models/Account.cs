@@ -37,11 +37,6 @@ namespace Net.S._2018.Zenovich._14.DAL.Models
                     throw new ArgumentOutOfRangeException(nameof(Amount));
                 }
 
-                if (amount - value < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(Amount));
-                }
-
                 amount = value;
             }
         }

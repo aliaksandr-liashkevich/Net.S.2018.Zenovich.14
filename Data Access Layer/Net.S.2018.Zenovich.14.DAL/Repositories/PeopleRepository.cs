@@ -21,6 +21,7 @@ namespace Net.S._2018.Zenovich._14.DAL.Repositories
         public void Add(Person person)
         {
             Db.People.Add(person);
+            Db.SaveChanges();
         }
 
         public IEnumerable<Person> GetAll()

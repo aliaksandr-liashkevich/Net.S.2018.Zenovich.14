@@ -16,12 +16,10 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
 {
     public class PersonService : IPersonService
     {
-        private IAccountRepository _accountRepository;
         private IPeopleRepository _peopleRepository;
 
         public PersonService(IUnitOfWork unitOfWork)
         {
-            _accountRepository = unitOfWork.AccountRepository;
             _peopleRepository = unitOfWork.PeopleRepository;
         }
 
@@ -32,8 +30,8 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
                 throw new ArgumentNullException(nameof(vm));
             }
 
-            var account = Mapper.Map<RegisterViewModel, Account>(vm);
-            _accountRepository.Add(account);
+            var person = Mapper.Map<RegisterViewModel, Person>(vm);
+            _peopleRepository.Add(person);
         }
 
         public IEnumerable<PersonViewModel> GetAll()
@@ -51,6 +49,19 @@ namespace Net.S._2018.Zenovich._14.BLL.Services
             }
 
             var person = Mapper.Map<Person, PersonViewModel>(_peopleRepository.Get(id));
+
+            return person;
+        }
+
+        public PersonViewModel Get(string email)
+        {
+            if (email == null)
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+
+            var person = Mapper.Map<Person, PersonViewModel>(_peopleRepository.GetAll()
+                .FirstOrDefault((p) => p.Email.Equals(email)));
 
             return person;
         }

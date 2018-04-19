@@ -19,7 +19,7 @@ namespace Net.S._2018.Zenovich._14.BLL.Infrastructure.Configuration
                 cfg.CreateMap<AddedAccountViewModel, Account>();
                 cfg.CreateMap<Account, AccountViewModel>();
 
-                cfg.CreateMap<RegisterViewModel, Account>();
+                cfg.CreateMap<RegisterViewModel, Person>();
                 cfg.CreateMap<Person, PersonViewModel>();
             });
         }

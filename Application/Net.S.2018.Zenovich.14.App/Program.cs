@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Net.S._2018.Zenovich._14.BLL.Infrastructure;
 using Net.S._2018.Zenovich._14.BLL.Services;
 using Net.S._2018.Zenovich._14.BLL.Services.Interfaces;
+using Net.S._2018.Zenovich._14.PL.ViewModels.Account;
+using Net.S._2018.Zenovich._14.PL.ViewModels.Person;
 
 namespace Net.S._2018.Zenovich._14.App
 {
@@ -15,23 +17,39 @@ namespace Net.S._2018.Zenovich._14.App
         {
 
             Client client = new Client();
-            IPersonService people = client.PersonService;
+            IPersonService personService = client.PersonService;
+            IAccountService accountService = client.AccountService;
 
-            var q = people.GetAll();
 
-            foreach (var person in q)
+
+            
+
+            var t = personService.Get("tom.x@gmail.com");
+
+            if (t != null)
             {
-                Console.WriteLine(person.FirstName + " " + person.LastName);
-                Console.WriteLine(person.Email);
+                Console.WriteLine(t.Id);
+                Console.WriteLine(t.FirstName + " " + t.LastName);
+                Console.WriteLine(t.Email);
                 Console.WriteLine("---");
             }
 
-            var qA = client.AccountService.GetAll();
+            var tomAccount =  personService.GetClientAccounts(t.Id).First();
 
-            foreach (var account in qA)
+            accountService.WithdrawalAmount(new UpdatedAmountViewModel()
             {
-                Console.WriteLine(account.Amount);
-            }
+                Currency = 100,
+                Id = tomAccount.Id
+            });
+
+            var acc = accountService.Get(tomAccount.Id);
+
+            Console.WriteLine(acc.Amount);
+
+
+            
+
+            client.Dispose();
 
             Console.ReadKey();
         }

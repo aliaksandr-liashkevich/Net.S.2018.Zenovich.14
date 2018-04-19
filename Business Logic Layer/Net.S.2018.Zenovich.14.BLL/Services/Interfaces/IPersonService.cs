@@ -16,6 +16,8 @@ namespace Net.S._2018.Zenovich._14.BLL.Services.Interfaces
 
         PersonViewModel Get(Guid id);
 
+        PersonViewModel Get(string email);
+
         IEnumerable<AccountViewModel> GetClientAccounts(Guid id);
     }
 }
