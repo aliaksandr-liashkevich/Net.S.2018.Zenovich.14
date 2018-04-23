@@ -12,16 +12,23 @@ namespace Net.S._2018.Zenovich._14.BLL.Infrastructure.Configuration
 {
     public static class Extensions
     {
+        private static bool isCalled = false;
+
         public static void AddMapper()
         {
-            Mapper.Initialize((cfg) =>
+            if (isCalled == false)
             {
-                cfg.CreateMap<AddedAccountViewModel, Account>();
-                cfg.CreateMap<Account, AccountViewModel>();
+                Mapper.Initialize((cfg) =>
+                {
+                    cfg.CreateMap<AddedAccountViewModel, Account>();
+                    cfg.CreateMap<Account, AccountViewModel>();
 
-                cfg.CreateMap<RegisterViewModel, Person>();
-                cfg.CreateMap<Person, PersonViewModel>();
-            });
+                    cfg.CreateMap<RegisterViewModel, Person>();
+                    cfg.CreateMap<Person, PersonViewModel>();
+                });
+
+                isCalled = true;
+            }
         }
     }
 }

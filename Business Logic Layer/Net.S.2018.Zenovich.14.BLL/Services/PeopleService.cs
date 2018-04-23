@@ -14,11 +14,11 @@ using Ninject;
 
 namespace Net.S._2018.Zenovich._14.BLL.Services
 {
-    public class PersonService : IPersonService
+    public class PeopleService : IPeopleService
     {
         private IPeopleRepository _peopleRepository;
 
-        public PersonService(IUnitOfWork unitOfWork)
+        public PeopleService(IUnitOfWork unitOfWork)
         {
             _peopleRepository = unitOfWork.PeopleRepository;
         }

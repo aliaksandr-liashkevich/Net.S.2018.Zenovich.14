@@ -7,7 +7,7 @@ using Net.S._2018.Zenovich._14.BLL.Infrastructure.Api;
 
 namespace Net.S._2018.Zenovich._14.BLL.Infrastructure.Bonuses
 {
-    class BonusCounter : IBonusCounter
+    public class BonusCounter : IBonusCounter
     {
         public long GetBonusFromRefill(IAccountTypeFeatures accountTypeFeatures, decimal amount)
         {

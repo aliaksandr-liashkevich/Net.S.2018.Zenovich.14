@@ -8,7 +8,7 @@ using Net.S._2018.Zenovich._14.DAL.Models;
 
 namespace Net.S._2018.Zenovich._14.BLL.Infrastructure.Features
 {
-    class AccountTypeFeatures : IAccountTypeFeatures
+    public class AccountTypeFeatures : IAccountTypeFeatures
     {
         public decimal WithdrawalPrice { get; protected set; }
 

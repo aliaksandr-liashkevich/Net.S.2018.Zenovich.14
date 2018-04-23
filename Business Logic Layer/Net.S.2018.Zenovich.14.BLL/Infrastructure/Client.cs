@@ -14,7 +14,7 @@ namespace Net.S._2018.Zenovich._14.BLL.Infrastructure
     public class Client : IDisposable
     {
         private IAccountService _accountService;
-        private IPersonService _personService;
+        private IPeopleService _peopleService;
         private IUnitOfWork _unitOfWork;
 
         private bool _disposed;
@@ -25,7 +25,25 @@ namespace Net.S._2018.Zenovich._14.BLL.Infrastructure
             IKernel kernel = new StandardKernel(new NinjectRegistrations());
             _unitOfWork = kernel.Get<IUnitOfWork>();
             _accountService = kernel.Get<IAccountService>();
-            _personService = kernel.Get<IPersonService>();
+            _peopleService = kernel.Get<IPeopleService>();
+        }
+
+        public Client(IKernel kernel)
+        {
+            Extensions.AddMapper();
+            _unitOfWork = kernel.Get<IUnitOfWork>();
+            _accountService = kernel.Get<IAccountService>();
+            _peopleService = kernel.Get<IPeopleService>();
+        }
+
+        public Client(IAccountService accountService,
+            IPeopleService peopleService,
+            IUnitOfWork unitOfWork)
+        {
+            Extensions.AddMapper();
+            _unitOfWork = unitOfWork;
+            _peopleService = peopleService;
+            _accountService = accountService;
         }
 
         public IAccountService AccountService
@@ -33,9 +51,9 @@ namespace Net.S._2018.Zenovich._14.BLL.Infrastructure
             get { return _accountService; }
         }
 
-        public IPersonService PersonService
+        public IPeopleService PeopleService
         {
-            get { return _personService; }
+            get { return _peopleService; }
         }
 
         ~Client()

@@ -17,14 +17,14 @@ namespace Net.S._2018.Zenovich._14.App
         {
 
             Client client = new Client();
-            IPersonService personService = client.PersonService;
+            IPeopleService peopleService = client.PeopleService;
             IAccountService accountService = client.AccountService;
 
 
 
             
 
-            var t = personService.Get("tom.x@gmail.com");
+            var t = peopleService.Get("tom.x@gmail.com");
 
             if (t != null)
             {
@@ -34,7 +34,7 @@ namespace Net.S._2018.Zenovich._14.App
                 Console.WriteLine("---");
             }
 
-            var tomAccount =  personService.GetClientAccounts(t.Id).First();
+            var tomAccount =  peopleService.GetClientAccounts(t.Id).First();
 
             accountService.WithdrawalAmount(new UpdatedAmountViewModel()
             {

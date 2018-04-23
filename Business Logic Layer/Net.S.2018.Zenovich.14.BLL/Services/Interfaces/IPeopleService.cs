@@ -8,7 +8,7 @@ using Net.S._2018.Zenovich._14.PL.ViewModels.Person;
 
 namespace Net.S._2018.Zenovich._14.BLL.Services.Interfaces
 {
-    public interface IPersonService 
+    public interface IPeopleService 
     {
         void Add(RegisterViewModel vm);
 
